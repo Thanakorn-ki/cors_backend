@@ -1,9 +1,13 @@
 var express = require('express')
 var app = express()
 var cors = require('cors')
-app.use(cors())
+
+var corsOptions = {
+  origin: ['http://localhost:90', 'http://127.0.0.1:90']
+}
+// app.use(cors()) full 
 app.set('port', (process.env.PORT || 90))
-app.get('/', function (req, res) {
+app.get('/', cors(corsOptions), function (req, res) {
   res.json({name: 'hello world.'})
 })
 app.listen(app.get('port'), function () {
